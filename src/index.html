@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>CRUD Emcomp</title>
         <link rel="stylesheet" href="css/index.css">
+        <script src="js/Register.js"></script>
         <script src="js/index.js"></script>
     </head>
 
@@ -19,6 +20,14 @@
                 <div id="filter">
                     <div>
                         <h2 class="title">Filtro</h2>
+                        <form id="registerForm">
+                            <input type="text" id="name"        placeholder="Nome completo">
+                            <input type="text" id="address"     placeholder="Endereço">
+                            <input type="text" id="phone"       placeholder="Telefone">
+                            <input type="text" id="email"       placeholder="E-Mail">
+                            <input type="text" id="idNumber"    placeholder="Identidade">
+                            <input type="button" value="asdf">
+                        </form>
                     </div>
     
                     <div>
@@ -34,36 +43,58 @@
     
                     <div class="category">
                         <p class="categoryName">A</p>
-                        <div class="register">teste</div>
-                        <div class="register">teste</div>
-                        <div class="register">teste</div>
-                        <div class="register">teste</div>
-                    </div>
-
-                    <div class="category">
-                        <p class="categoryName">B</p>
-                        <div class="register">teste</div>
-                        <div class="register">teste</div>
-                        <div class="register">teste</div>
-                        <div class="register">teste</div>
-                    </div>
-
-                    <div class="category">
-                        <p class="categoryName">C</p>
-                        <div class="register">teste</div>
-                        <div class="register">teste</div>
-                        <div class="register">teste</div>
-                        <div class="register">teste</div>
-                        <div class="register">teste</div>
-                    </div>
-
-                    <div class="category">
-                        <p class="categoryName">D</p>
-                        <div class="register">teste</div>
-                        <div class="register">teste</div>
                     </div>
                 </div>
             </div>
         </main>
     </body>
+
+    
+    <template id="register_template">
+        <!--<div class="register hidden"> -->
+            <h1>Nome do usuário</h1>
+            <div class="dateContainer">
+                <span>Criado em DD/MM/AAAA</span>
+                <span>Última modificação: DD/MM/AAAA</span>
+            </div>
+            <form>
+                <div class="inputContainer">
+                    <h2>Nome completo</h2>
+                    <input type="text" name="name" placeholder="Nome do usuário">
+                </div>
+                <div class="inputContainer">
+                    <h2>Endereço</h2>
+                    <input type="text" name="address" placeholder="Endereço do usuário">
+                </div>
+                <div class="inputContainer">
+                    <h2>Telefone</h2>
+                    <input type="text" name="phone" placeholder="(XX) XXXX-XXXX">
+                </div>
+                <div class="inputContainer">
+                    <h2>E-Mail</h2>
+                    <input type="text" name="email" placeholder="exemplo@exemplo.com">
+                </div>
+                <div class="inputContainer">
+                    <h2>Nº de identidade</h2>
+                    <input type="text" name="idNumber" placeholder="1234567890">
+                </div>
+                <div class="accoutType">
+                    <span>Tipo da conta: </span>
+                    <label>
+                        <input type="radio" name="accountType" value="admin">
+                        <span>Administrador</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="accountType" value="user">
+                        <span>Usuário</span>
+                    </label>
+                </div>
+                <div class="action">
+                    <input type="button" class="deleteBtn" value="Excluir">
+                    <input type="button" class="discartBtn" value="Descartar alterações">
+                    <input type="button" class="saveBtn" value="Salvar alterações">
+                </div>
+            </form>
+        <!--</div> -->
+    </template>
 </html>

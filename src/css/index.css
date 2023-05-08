@@ -68,16 +68,23 @@ div#registeredUsers{
 
 
 div.register{
-    height: 111px;
-    border: 1px solid yellow;
+    max-height: fit-content;
+    border: 4px solid white;
     margin: 20px 10px 20px 10px;
-    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    
     
     transition-duration: 0.6s;
     transition-timing-function: cubic-bezier(.23,1.66,.29,.95);
 }
 
-div.register:hover{ height:400px }
+div.register_:hover input[type="text"]{
+    height: 0px;
+    transition-duration: 0.6s;
+    transition-timing-function: cubic-bezier(.23,1.66,.29,.95);
+}
 
 div.category{}
 
@@ -88,3 +95,141 @@ p.categoryName{
     top: 40px;
 }
 
+.dateContainer{ 
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* GENERAL */
+input[type="text"]{
+    box-sizing: border-box;
+    padding: 0px 10px;
+    background-color: #D9D9D9;
+    border: 2px solid black;
+    border-radius: 4px;
+    height: 30px;
+    color: black;
+}
+
+
+
+/* REGISTER FORM*/
+form#registerForm{
+    background-color: gray;
+}
+
+form#registerForm input[type="text"]{
+    width: 100%;
+}
+
+form#registerForm input[type="button"]{
+    width: 50%;
+}
+
+
+
+/* FORM */
+.inputContainer *{  
+    width: 100%;
+    height: fit-content;
+}
+
+div.accoutType{
+    width: 100%;
+    height: 88px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.action{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.action input[type="button"]{ 
+    width: 32%;
+    border: none;
+    color: black;
+    padding: 5px;
+    border-radius: 5px;  
+}
+
+.deleteBtn{ background-color: #E47878}
+.discartBtn{ background-color: #D5E478}
+.saveBtn{ background-color: #78E496}
+
+.register h2{
+    position: relative;
+    top: 0px;
+    height: 35px;
+}
+
+h1{
+    font-size: 32px;
+}
+
+/* REGISTER (CLOSED)*/
+.register.hidden *{ 
+    pointer-events: none;
+    user-select: none;
+}
+
+.register h1{
+    transition-duration: .4s;
+    transition-timing-function: cubic-bezier(.39,2.14,.2,.9);
+}
+
+.register *{
+    transition-duration: .6s;
+    transition-timing-function: cubic-bezier(.12,.97,.06,1);
+}
+
+.register.hidden h1{
+    font-size: 20px;
+}
+
+.register.hidden h2{  
+    transform: scaleY(1);
+    height: 0px;
+    opacity: 0%;
+    
+    top: 0%;
+    
+}
+
+.register.hidden .dateContainer{
+    height: 0px;
+    opacity: 0%;
+}
+
+.register.hidden div.accoutType{
+    height: 0px;
+    opacity: 0%;
+}
+
+.register.hidden .action{
+    opacity: 0%;
+    transform: scaleY(0);
+    height: 0px;
+}
+
+
+.register.hidden input[type="text"]{
+    background-color: transparent;
+    color: white;
+    border-color: transparent;
+    cursor: default;
+}
+
+.register.hidden input[name="name"]{
+    opacity: 0%;
+    height: 0px;
+}
