@@ -10,8 +10,6 @@ let registers = new Array();
 let registerContainer;
 
 window.onload = function(){
-    // VARIABLE INITIALIZATION
-
     registerContainer   =   document.querySelector("div.category");
     form                =   document.querySelector("form#registerForm"); 
     btnRegister         =   form.querySelector("input[name='register']");
@@ -24,19 +22,16 @@ window.onload = function(){
     
     if(!Database.isEmpty){
         let registers = Database.loadRegisters();
-        //console.log(registers)
         registers.forEach(reg => {
             let tempReg = createRegister();
             let id = registers.length;
             tempReg.importFromJSON(reg);
             registers[id] = tempReg;
             insertRegister(tempReg);
-            tempReg.resetFields();
+            tempReg.discardChanges();
         });
     }
     
-
-    // EVENT LISTENERS
     btnRegister.addEventListener("click", ()=>{
         let tempReg = createRegister();
 
@@ -55,32 +50,26 @@ window.onload = function(){
 }
 
 
-// FUNCTIONS
-
 function createRegister(){
     let tempRegister = new Register();
     tempRegister.initialize();
     tempRegister.importFromJSON(readFormJSON());
 
     tempRegister.onExclude = function(){
-        console.log("exclude")
         Database.delete(tempRegister);
         tempRegister.selfDestroy();
     }
 
+    tempRegister.onDiscard = function(){
+        tempRegister.discardChanges();
+    }
+
     tempRegister.onSave = function(){
-        console.log("save")
         Database.delete(tempRegister);
-        
-        //tempRegister.importFromJSON(readFormJSON())
-        //tempRegister.selfUpdate()
         tempRegister.importFromJSON(tempRegister.readFormJSON())
         Database.save(tempRegister)
-        console.log(tempRegister.readFormJSON())
-        //tempRegister.resetFields();
-        
     }
-    tempRegister.resetFields();
+    tempRegister.discardChanges();
 
     return(tempRegister);
 }

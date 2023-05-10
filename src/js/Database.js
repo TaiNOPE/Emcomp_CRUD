@@ -2,7 +2,6 @@ class Database{
     static test(){
         for(let i = 0; i <localStorage.length; i++){
             let key = localStorage.key(i);
-           // console.log(localStorage.key(i) + " = " + localStorage.getItem(key));
         }
     }
 
@@ -23,7 +22,6 @@ class Database{
 
     static save(register){
         localStorage.setItem(register.userId, register.exportToJSON());
-        console.log("saved " + register.userId);
     }
 
 
