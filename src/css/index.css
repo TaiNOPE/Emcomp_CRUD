@@ -178,7 +178,7 @@ h1{
 
 /* REGISTER (CLOSED)*/
 .register.hidden *{ 
-    pointer-events: none;
+    /*pointer-events: none;*/
     user-select: none;
 }
 

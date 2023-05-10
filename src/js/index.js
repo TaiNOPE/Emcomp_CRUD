@@ -5,6 +5,7 @@ let inputAddress;
 let inputPhone;
 let inputEmail;
 let inputIdNumber;
+let inputAccountType;
 let registers = new Array();
 let registerContainer;
 
@@ -20,52 +21,34 @@ window.onload = function(){
     inputEmail          =   form.querySelector("input[name='email']");
     inputIdNumber       =   form.querySelector("input[name='idNumber']");
 
-
+    
     if(!Database.isEmpty){
-        let savedRegisters = Database.loadRegisters();
-        console.log((savedRegisters))
-        
-        for([registerId, register] of savedRegisters){
+        let registers = Database.loadRegisters();
+        //console.log(registers)
+        registers.forEach(reg => {
             let tempReg = createRegister();
             let id = registers.length;
-            tempReg.importFromJSON(register);
+            tempReg.importFromJSON(reg);
             registers[id] = tempReg;
-            insertRegister(registers[id]);
-        }
-        /*
-        savedRegisters.forEach(reg => {
-            register = reg[1];
-            let tempReg = createRegister();
-            let id = registers.length;
-            tempReg.importFromJSON(register);
-            registers[id] = tempReg;
-            insertRegister(registers[id]);
+            insertRegister(tempReg);
+            tempReg.resetFields();
         });
-        */
     }
-    /*
-    for(let i=0; i < savedRegisters.length; i++){
-        let tempReg = createRegister();
-        tempReg.importFromJSON(savedRegisters.registers[i]);
-        registers[1] = tempReg;
-        insertRegister(registers[1]);
-    }
-    */
     
 
     // EVENT LISTENERS
     btnRegister.addEventListener("click", ()=>{
         let tempReg = createRegister();
-        //if(Database.existsRegister(tempReg)) return;
-        console.log(Database.existsRegister(tempReg))
-        if(!Database.existsRegister(tempReg)){
-            let index = registers.length;
-            registers[index] = tempReg;
-            Database.save(registers[index]);
-            insertRegister(registers[index]);
-        }else{
+
+        if(Database.existsRegister(tempReg)){
             console.log("exists")
+            return;
         }
+
+        let index = registers.length;
+        registers[index] = tempReg;
+        Database.save(registers[index]);
+        insertRegister(registers[index]);
     });
 
     Database.test();
@@ -75,20 +58,51 @@ window.onload = function(){
 // FUNCTIONS
 
 function createRegister(){
-    // must use querySelector() every time for radio buttons
-    let inputAccountType = form.querySelector("input[name='accountType']:checked");
     let tempRegister = new Register();
-    tempRegister.userName        = inputName.value;
-    tempRegister.userAddress     = inputAddress.value;
-    tempRegister.userPhone       = inputPhone.value;
-    tempRegister.userEmail       = inputEmail.value;
-    tempRegister.userIdNumber    = inputIdNumber.value;
-    tempRegister.userAccountType = inputAccountType.value;
+    tempRegister.initialize();
+    tempRegister.importFromJSON(readFormJSON());
+
+    tempRegister.onExclude = function(){
+        console.log("exclude")
+        Database.delete(tempRegister);
+        tempRegister.selfDestroy();
+    }
+
+    tempRegister.onSave = function(){
+        console.log("save")
+        Database.delete(tempRegister);
+        
+        //tempRegister.importFromJSON(readFormJSON())
+        //tempRegister.selfUpdate()
+        tempRegister.importFromJSON(tempRegister.readFormJSON())
+        Database.save(tempRegister)
+        console.log(tempRegister.readFormJSON())
+        //tempRegister.resetFields();
+        
+    }
+    tempRegister.resetFields();
 
     return(tempRegister);
 }
 
 
+function readFormJSON(){
+    // must use querySelector() every time for radio buttons
+    let inputAccountType = form.querySelector("input[name='accountType']:checked");
+
+    let json = {
+        "userName": inputName.value,
+        "userAddress": inputAddress.value,
+        "userPhone": inputPhone.value,
+        "userEmail": inputEmail.value,
+        "userId": inputIdNumber.value,
+        "userAccountType": inputAccountType.value
+    };
+
+    return(JSON.stringify(json));
+}
+
 function insertRegister(register){
     registerContainer.appendChild(register.element);
 }
+
