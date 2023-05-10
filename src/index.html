@@ -5,6 +5,7 @@
         <title>CRUD Emcomp</title>
         <link rel="stylesheet" href="css/index.css">
         <script src="js/Register.js"></script>
+        <script src="js/Database.js"></script>
         <script src="js/index.js"></script>
     </head>
 
@@ -21,12 +22,21 @@
                     <div>
                         <h2 class="title">Filtro</h2>
                         <form id="registerForm">
-                            <input type="text" id="name"        placeholder="Nome completo">
-                            <input type="text" id="address"     placeholder="Endereço">
-                            <input type="text" id="phone"       placeholder="Telefone">
-                            <input type="text" id="email"       placeholder="E-Mail">
-                            <input type="text" id="idNumber"    placeholder="Identidade">
-                            <input type="button" value="asdf">
+                            <input type="text" name="name"        placeholder="Nome completo">
+                            <input type="text" name="address"     placeholder="Endereço">
+                            <input type="text" name="phone"       placeholder="Telefone">
+                            <input type="text" name="email"       placeholder="E-Mail">
+                            <input type="text" name="idNumber"    placeholder="Identidade">
+                            <span>Tipo da conta: </span>
+                            <label>
+                                <input type="radio" name="accountType" value="admin">
+                                <span>Administrador</span>
+                            </label>
+                            <label>
+                                <input type="radio" name="accountType" value="user">
+                                <span>Usuário</span>
+                            </label>
+                            <input type="button" name="register" value="asdf">
                         </form>
                     </div>
     
@@ -49,10 +59,10 @@
         </main>
     </body>
 
-    
+    <!-- REGISTER TEMPLATE -->
     <template id="register_template">
         <!--<div class="register hidden"> -->
-            <h1>Nome do usuário</h1>
+            <h1 id="name">Nome do usuário</h1>
             <div class="dateContainer">
                 <span>Criado em DD/MM/AAAA</span>
                 <span>Última modificação: DD/MM/AAAA</span>
