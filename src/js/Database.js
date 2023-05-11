@@ -21,6 +21,15 @@ class Database{
 
 
     static save(register){
+        /*
+        if(this.exists(register.userId)){
+            register.changeDate = new Date().toJSON();
+        }else{
+            let creationDate = new Date().toJSON();
+            register.creationDate = creationDate;
+            register.changeDate = creationDate;
+        }
+        */
         localStorage.setItem(register.userId, register.exportToJSON());
     }
 

@@ -12,13 +12,15 @@ class Register{
         this._userEmail         = "";
         this._userId            = "";
         this._userAccountType   = "";
-        this._creationDate      = "01/01/2000";
-        this._changeDate        = "01/01/2000";
+        this._creationDate      = "";
+        this._changeDate        = "";
     }
 
 
     initialize(){
         this._headerName        =   this._element.querySelector("h1");
+        this._spanCreationDate  =   this._element.querySelector("span#creationDate");
+        this._spanChangeDate    =   this._element.querySelector("span#changeDate");
         this._inputName         =   this._element.querySelector("input[name='name']");
         this._inputAddress      =   this._element.querySelector("input[name='address']");
         this._inputPhone        =   this._element.querySelector("input[name='phone']");
@@ -69,6 +71,36 @@ class Register{
     get isMinimized(){ return this._isMinimized; }
 
 
+    get creationDate(){ return(this._creationDate); }
+
+    set creationDate(dateJSON){
+        let date = new Date(dateJSON);
+        let dateStr = (
+            "Criado em: " + date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear() +
+            " às " + date.getHours() + ":" + 
+            ((date.getMinutes() <= 9) ? "0" : "") + date.getMinutes() + ":" +
+            ((date.getSeconds() <= 9) ? "0" : "") + date.getSeconds()
+        );
+        this._creationDate = date;
+        this._spanCreationDate.innerHTML = dateStr;
+    }
+
+
+    get changeDate(){ return(this._changeDate); }
+
+    set changeDate(dateJSON){
+        let date = new Date(dateJSON);
+        let dateStr = (
+            "Modificado em: " + date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear() +
+            " às " + date.getHours() + ":" + 
+            ((date.getMinutes() <= 9) ? "0" : "") + date.getMinutes() + ":" +
+            ((date.getSeconds() <= 9) ? "0" : "") + date.getSeconds()
+        );
+        this._changeDate = date;
+        this._spanChangeDate.innerHTML = dateStr;
+    }
+
+
     get userName(){ return (this._userName); }
 
     set userName(name){
@@ -102,9 +134,10 @@ class Register{
     }
 
     set userAccountType(type){ 
-        // finds the radio button according the value in 'type'
-        // not the greatest way to do this, but at least it doesn't need to be fixed when add new account types
-        // must use querySelector() every time for radio buttons
+        /*  finds the radio button according the value in 'type'
+            not the greatest way to do this, but at least it doesn't need to be fixed when add new account types
+            must use querySelector() every time for radio buttons
+        */
         let radioBtn = this._element.querySelector("input[name='accountType'][value='" + type + "']");;
         if(radioBtn){ radioBtn.checked = true; }
     }
@@ -119,6 +152,7 @@ class Register{
 
 
     maximize(){
+        console.log(this.creationDate);
         this.discardChanges();
         this._element.classList.remove("hidden");
         this._element.classList.add("visible");
@@ -149,7 +183,9 @@ class Register{
             "userPhone"         : this._userPhone,
             "userEmail"         : this._userEmail,
             "userId"            : this._userId,
-            "userAccountType"   : this.userAccountType
+            "userAccountType"   : this.userAccountType,
+            "creationDate"      : this._creationDate,
+            "changeDate"        : this._changeDate
         };
 
         return(JSON.stringify(json));
@@ -164,6 +200,8 @@ class Register{
         this.userEmail          = obj["userEmail"];
         this.userId             = obj["userId"];
         this.userAccountType    = obj["userAccountType"];
+        this.creationDate       = obj["creationDate"];
+        this.changeDate         = obj["changeDate"];
     }
 
 

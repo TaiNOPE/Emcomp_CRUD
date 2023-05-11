@@ -52,8 +52,11 @@ window.onload = function(){
 
 function createRegister(){
     let tempRegister = new Register();
+    let creationDate = new Date().toJSON();
     tempRegister.initialize();
     tempRegister.importFromJSON(readFormJSON());
+    tempRegister.creationDate = creationDate;
+    tempRegister.changeDate = creationDate;
 
     tempRegister.onExclude = function(){
         Database.delete(tempRegister);
@@ -65,27 +68,42 @@ function createRegister(){
     }
 
     tempRegister.onSave = function(){
+        let creationDate = tempRegister.creationDate;
         Database.delete(tempRegister);
         tempRegister.importFromJSON(tempRegister.readFormJSON())
+        tempRegister.creationDate = creationDate;
+        tempRegister.changeDate = new Date().toJSON();
         Database.save(tempRegister)
     }
     tempRegister.discardChanges();
+
+    setTimeout(() => {
+        let c = 0;
+        document.querySelector(".register").querySelectorAll("input[type='text']").forEach(i => {
+            console.log("ok")
+            i.style.transitionDelay = (++c*0.04) + "s"
+            //i.style.transitionDuration = c*2 + "s"
+            
+        })
+    }, 1000);
 
     return(tempRegister);
 }
 
 
 function readFormJSON(){
-    // must use querySelector() every time for radio buttons
+    /* must use querySelector() every time for radio buttons */
     let inputAccountType = form.querySelector("input[name='accountType']:checked");
-
+    let creationDate = new Date().toJSON();
     let json = {
-        "userName": inputName.value,
-        "userAddress": inputAddress.value,
-        "userPhone": inputPhone.value,
-        "userEmail": inputEmail.value,
-        "userId": inputIdNumber.value,
-        "userAccountType": inputAccountType.value
+        "userName"          : inputName.value,
+        "userAddress"       : inputAddress.value,
+        "userPhone"         : inputPhone.value,
+        "userEmail"         : inputEmail.value,
+        "userId"            : inputIdNumber.value,
+        "userAccountType"   : inputAccountType.value/*,
+        "creationDate"      : creationDate,
+        "changeDate"        : creationDate*/
     };
 
     return(JSON.stringify(json));
