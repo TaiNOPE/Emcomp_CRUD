@@ -3,7 +3,7 @@ class Register{
         let template = document.querySelector("template#register_template");
         this._element = document.createElement("div");  /* bypass cloneNode(), so event listeners can be added */
         this._element.innerHTML = template.innerHTML;
-        this._element.className = "register hidden";
+        this._element.className = "register minimized";
         this._isMinimized = true;
 
         this._userName          = "";
@@ -11,6 +11,7 @@ class Register{
         this._userPhone         = "";
         this._userEmail         = "";
         this._userId            = "";
+        this._userPassword      = "";
         this._userAccountType   = "";
         this._creationDate      = "";
         this._changeDate        = "";
@@ -26,6 +27,7 @@ class Register{
         this._inputPhone        =   this._element.querySelector("input[name='phone']");
         this._inputEmail        =   this._element.querySelector("input[name='email']");
         this._inputIdNumber     =   this._element.querySelector("input[name='idNumber']");
+        this._inputPassword     =   this._element.querySelector("input[name='password']");
         this._buttonExclude     =   this._element.querySelector("input[type='button'][name='excludeBtn']")
         this._buttonDiscard     =   this._element.querySelector("input[type='button'][name='discartBtn']")
         this._buttonSave        =   this._element.querySelector("input[type='button'][name='saveBtn']")
@@ -54,6 +56,11 @@ class Register{
         this._buttonSave.addEventListener("click", ()=>{
             if(this._onSave){ this._onSave(); }
         });
+
+        let delay = 0;
+        this._element.querySelectorAll("input.credential").forEach(i => {
+            i.style.transitionDelay = (++delay*0.04) + "s"
+        })
     }
 
 
@@ -128,6 +135,11 @@ class Register{
     set userId(id){ this._userId = id; }
 
 
+    get userPassword(){ return (this._userPassword); }
+
+    set userPassword(passw){ this._userPassword = passw; }
+
+
     get userAccountType(){ 
         this._userAccountType  =  this._element.querySelector("input[name='accountType']:checked").value;
         return (this._userAccountType);
@@ -145,17 +157,16 @@ class Register{
 
     minimize(){
         this.discardChanges();
-        this._element.classList.remove("visible");
-        this._element.classList.add("hidden");
+        this._element.classList.remove("maximized");
+        this._element.classList.add("minimized");
         this._isMinimized = true;
     }
 
 
     maximize(){
-        console.log(this.creationDate);
         this.discardChanges();
-        this._element.classList.remove("hidden");
-        this._element.classList.add("visible");
+        this._element.classList.remove("minimized");
+        this._element.classList.add("maximized");
         this._isMinimized = false;
     }
 
@@ -167,6 +178,7 @@ class Register{
         this._inputPhone.value      = this.userPhone;
         this._inputEmail.value      = this.userEmail;
         this._inputIdNumber.value   = this.userId;
+        this._inputPassword.value   = this.userPassword;
         this.userAccountType        = this._userAccountType;
     }
 
@@ -183,6 +195,7 @@ class Register{
             "userPhone"         : this._userPhone,
             "userEmail"         : this._userEmail,
             "userId"            : this._userId,
+            "userPassword"      : this._userPassword,
             "userAccountType"   : this.userAccountType,
             "creationDate"      : this._creationDate,
             "changeDate"        : this._changeDate
@@ -194,11 +207,12 @@ class Register{
 
     importFromJSON(json){
         let obj = JSON.parse(json);
-        this.userName = obj["userName"];
+        this.userName           = obj["userName"];
         this.userAddress        = obj["userAddress"];
         this.userPhone          = obj["userPhone"];
         this.userEmail          = obj["userEmail"];
         this.userId             = obj["userId"];
+        this.userPassword       = obj["userPassword"];
         this.userAccountType    = obj["userAccountType"];
         this.creationDate       = obj["creationDate"];
         this.changeDate         = obj["changeDate"];
@@ -212,6 +226,7 @@ class Register{
             "userPhone"         :  this._inputPhone.value,
             "userEmail"         :  this._inputEmail.value,
             "userId"            :  this._inputIdNumber.value,
+            "userPassword"      :  this._inputPassword.value,
             "userAccountType"   :  this._element.querySelector("input[name='accountType']:checked").value
         };
 

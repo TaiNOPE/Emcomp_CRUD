@@ -1,0 +1,74 @@
+#loginPage *{
+  margin: 0px;
+  padding: 0px;
+  font-family: "Noto Sans";
+  color: black;
+}
+
+
+div#loginPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0e0f1e;
+}
+
+
+#loginPage main{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  
+  padding: 10px;
+  background-color:  #bebbe7;
+  border-radius: 15px;
+  width: 50%;
+  height: 400px;
+  
+  box-shadow: 0px 0px 30px black;
+}
+
+
+#loginPage h1{
+  letter-spacing: 30px;
+  text-align: center;
+  height: fit-content;
+  font-size: 40px;
+  
+  text-shadow: 0px 0px 5px black;
+  text-decoration-line: red;
+}
+
+
+#loginPage h2{
+  font-size: 14px;
+}
+
+
+#loginPage form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+}
+
+
+#loginPage label.credential{
+  display: flex;
+  flex-direction: column;
+}
+
+
+#loginPage input.credential{
+  width: 90%;
+  align-self: center
+}
+
+
+#loginPage input[name="submit"]{
+  align-self: center;
+  width: 30%;
+}

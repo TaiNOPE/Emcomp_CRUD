@@ -5,231 +5,57 @@
     font-family: "Noto Sans";
 }
 
+
 body{
-    background-color: #19092E;
+    background-color: black;
     width: 100%;
     height: 100%;
+    overflow-y: hidden;
 }
 
-header{
+
+nav{
     background-color: #406399;
-    height: 40px;
+    height: 30px;
     display: flex;
     flex-direction: row;
-}
-
-main{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-}
-
-main h1{
-    width: 100%;
-}
-
-div.title{
-    background-color: #19092ED0;
-    backdrop-filter: blur(5px);
-    position: sticky;
-    top: 0px;
-    height: 40px;
-    text-align: center;
+    position: absolute;
+    width: 100vw;
     z-index: 10;
 }
 
-div#container{
-    border: 1px solid white;
-    height: inherit;
-    
-}
 
-
-div#container{
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-}
-
-div#registeredUsers, div#filter{
-    width: 50%;
-    /*outline: 1px solid green;*/
-}
-
-div#filter{ border-right: 1px solid gray; }
-
-
-div#registeredUsers{ 
-    border-left: 1px solid gray; 
-    max-height: 800px;
-    overflow-y: scroll;
-}
-
-
-div.register{
-    max-height: fit-content;
-    border: 4px solid white;
-    margin: 20px 10px 20px 10px;
-    display: flex;
-    flex-direction: column;
-    padding: 10px 20px;
-    
-    
-    transition-duration: 0.6s;
-    transition-timing-function: cubic-bezier(.23,1.66,.29,.95);
-}
-
-div.register_:hover input[type="text"]{
-    height: 0px;
-    transition-duration: 0.6s;
-    transition-timing-function: cubic-bezier(.23,1.66,.29,.95);
-}
-
-div.category{}
-
-p.categoryName{
-    background-color: #4e6bb2;
+nav button{
+    background: #ffffff2f;
     margin: 0px 10px;
-    position: sticky;
-    top: 40px;
-}
-
-.dateContainer{ 
-    width: 100%;
-    height: 40px;
-    font-size: 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-/* GENERAL */
-input[type="text"]{
-    box-sizing: border-box;
-    padding: 0px 10px;
-    background-color: #D9D9D9;
-    border: 2px solid black;
-    border-radius: 4px;
-    height: 30px;
-    color: black;
-}
-
-
-
-/* REGISTER FORM*/
-form#registerForm{
-    background-color: gray;
-}
-
-form#registerForm input[type="text"]{
-    width: 100%;
-}
-
-form#registerForm input[type="button"]{
-    width: 50%;
-}
-
-
-
-/* FORM */
-.inputContainer *{  
-    width: 100%;
-    height: fit-content;
-}
-
-div.accoutType{
-    width: 100%;
-    height: 88px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.action{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.action input[type="button"]{ 
-    width: 32%;
-    border: none;
-    color: black;
     padding: 5px;
-    border-radius: 5px;  
+    border-radius: 5px;
+    border: 2px solid white;
 }
 
-.deleteBtn{ background-color: #E47878}
-.discartBtn{ background-color: #D5E478}
-.saveBtn{ background-color: #78E496}
 
-.register h2{
-    position: relative;
-    top: 0px;
-    height: 35px;
+nav button.selected{
+    border: 2px solid red;
 }
 
-h1{
-    font-size: 32px;
+
+div#mainPage, div#loginPage, div#registersPage{
+    margin-top: 30px;
+    transition-duration: .3s;
+    position: absolute;
 }
 
-/* REGISTER (CLOSED)*/
-.register.hidden *{ 
-    /*pointer-events: none;*/
-    user-select: none;
+div#mainPage.hidden, div#loginPage.hidden, div#registersPage.hidden{
+    z-index: -1;
+    top: -100%;
+    transition-timing-function: cubic-bezier(.22,.72,.96,.35);
 }
 
-.register h1{
-    transition-duration: .4s;
-    transition-timing-function: cubic-bezier(.39,2.14,.2,.9);
-}
 
-.register *{
-    transition-duration: .6s;
-    transition-timing-function: cubic-bezier(.12,.97,.06,1);
-}
-
-.register.hidden h1{
-    font-size: 20px;
-}
-
-.register.hidden h2{  
-    transform: scaleY(1);
-    height: 0px;
-    opacity: 0%;
-    
+div#mainPage.visible, div#loginPage.visible, div#registersPage.visible{
     top: 0%;
-    
-}
-
-.register.hidden .dateContainer{
-    height: 0px;
-    opacity: 0%;
-}
-
-.register.hidden div.accoutType{
-    height: 0px;
-    opacity: 0%;
-}
-
-.register.hidden .action{
-    opacity: 0%;
-    transform: scaleY(0);
-    height: 0px;
-}
-
-
-.register.hidden input[type="text"]{
-    background-color: transparent;
-    color: white;
-    border-color: transparent;
-    cursor: default;
-}
-
-.register.hidden input[name="name"]{
-    opacity: 0%;
-    height: 0px;
+    z-index: 1;
+    transition-delay: .2s;
+    transition-timing-function: cubic-bezier(.15,1.7,.38,.59);
+    transition-duration: .4s;
 }

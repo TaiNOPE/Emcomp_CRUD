@@ -5,12 +5,14 @@ let inputAddress;
 let inputPhone;
 let inputEmail;
 let inputIdNumber;
+let inputPassword;
+let inputRepeatPassword;
 let inputAccountType;
 let registers = new Array();
 let registerContainer;
 
-window.onload = function(){
-    registerContainer   =   document.querySelector("div.category");
+window.onload = function(){    
+    registerContainer   =   document.querySelector("div#registersContainer");
     form                =   document.querySelector("form#registerForm"); 
     btnRegister         =   form.querySelector("input[name='register']");
     inputName           =   form.querySelector("input[name='name']");
@@ -18,7 +20,8 @@ window.onload = function(){
     inputPhone          =   form.querySelector("input[name='phone']");
     inputEmail          =   form.querySelector("input[name='email']");
     inputIdNumber       =   form.querySelector("input[name='idNumber']");
-
+    inputPassword       =   form.querySelector("input[name='password']");
+    inputRepeatPassword =   form.querySelector("input[name='repeatPassword']");
     
     if(!Database.isEmpty){
         let registers = Database.loadRegisters();
@@ -33,8 +36,18 @@ window.onload = function(){
     }
     
     btnRegister.addEventListener("click", ()=>{
-        let tempReg = createRegister();
+        let json = readFormJSON();
+        if(json["userId"] == "admin"){
+            alert("Não pode ser cadastrado 'admin'");
+            return;
+        }
+        if(json["userPassword"] != json["repeatPassword"]){
+            alert("Senhas não correspondem");
+            return;
+        }
 
+        json = JSON.stringify(json);
+        let tempReg = createRegister();
         if(Database.existsRegister(tempReg)){
             console.log("exists")
             return;
@@ -47,6 +60,8 @@ window.onload = function(){
     });
 
     Database.test();
+
+    initLogin();
 }
 
 
@@ -54,7 +69,7 @@ function createRegister(){
     let tempRegister = new Register();
     let creationDate = new Date().toJSON();
     tempRegister.initialize();
-    tempRegister.importFromJSON(readFormJSON());
+    tempRegister.importFromJSON(JSON.stringify(readFormJSON()));
     tempRegister.creationDate = creationDate;
     tempRegister.changeDate = creationDate;
 
@@ -77,16 +92,6 @@ function createRegister(){
     }
     tempRegister.discardChanges();
 
-    setTimeout(() => {
-        let c = 0;
-        document.querySelector(".register").querySelectorAll("input[type='text']").forEach(i => {
-            console.log("ok")
-            i.style.transitionDelay = (++c*0.04) + "s"
-            //i.style.transitionDuration = c*2 + "s"
-            
-        })
-    }, 1000);
-
     return(tempRegister);
 }
 
@@ -101,15 +106,57 @@ function readFormJSON(){
         "userPhone"         : inputPhone.value,
         "userEmail"         : inputEmail.value,
         "userId"            : inputIdNumber.value,
-        "userAccountType"   : inputAccountType.value/*,
-        "creationDate"      : creationDate,
-        "changeDate"        : creationDate*/
+        "userPassword"          : inputPassword.value,
+        "repeatPassword"    : inputRepeatPassword.value,
+        "userAccountType"   : inputAccountType.value
     };
-
-    return(JSON.stringify(json));
+    //return(JSON.stringify(json));
+    return(json);
 }
+
 
 function insertRegister(register){
     registerContainer.appendChild(register.element);
 }
 
+
+function changePage(pageName){
+    console.log("changing page to: " + pageName);
+    let regPage = document.querySelector("div#registersPage");
+    let loginPage = document.querySelector("div#loginPage");
+    let mainPage = document.querySelector("div#mainPage");
+    let mainPageBtn = document.querySelector("nav #mainPageBtn");
+    let loginPageBtn = document.querySelector("nav #loginPageBtn");
+    let registersPageBtn = document.querySelector("nav #registersPageBtn");
+    switch(pageName){
+        case "login":
+            mainPageBtn.classList.remove("selected");
+            loginPageBtn.classList.add("selected");
+            registersPageBtn.classList.remove("selected");
+
+            loginPage.classList = "visible";
+            regPage.classList = "hidden";
+            mainPage.classList = "hidden";
+            break;
+        case "registers":
+            mainPageBtn.classList.remove("selected");
+            loginPageBtn.classList.remove("selected");
+            registersPageBtn.classList.add("selected");
+
+            loginPage.classList = "hidden";
+            regPage.classList = "visible";
+            mainPage.classList = "hidden";
+            break;
+        case "main":
+            mainPageBtn.classList.add("selected");
+            loginPageBtn.classList.remove("selected");
+            registersPageBtn.classList.remove("selected");
+
+
+            loginPage.classList = "hidden";
+            regPage.classList = "hidden";
+            mainPage.classList = "visible";
+            break;
+        
+    }
+}

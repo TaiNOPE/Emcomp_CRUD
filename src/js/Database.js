@@ -21,15 +21,6 @@ class Database{
 
 
     static save(register){
-        /*
-        if(this.exists(register.userId)){
-            register.changeDate = new Date().toJSON();
-        }else{
-            let creationDate = new Date().toJSON();
-            register.creationDate = creationDate;
-            register.changeDate = creationDate;
-        }
-        */
         localStorage.setItem(register.userId, register.exportToJSON());
     }
 
@@ -43,6 +34,11 @@ class Database{
         return(registers)
     }
 
+    
+    static getRegisterJSON(registerId){
+        let regJSON = localStorage.getItem(registerId);
+        return(regJSON);
+    }
 
     static delete(register){
         localStorage.removeItem(register.userId);
