@@ -1,0 +1,88 @@
+#loginPage *{
+  margin: 0px;
+  padding: 0px;
+  font-family: "Noto Sans";
+  color: black;
+}
+
+
+div#loginPage{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0e0f1e;
+}
+
+
+div#loginPage main{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #252851;
+  width: 100%;
+  height: 60%;
+  align-items: center;
+  box-shadow: 0px 10px 0px #40458d;
+}
+
+#loginPage div#left{
+  display: flex;
+  flex-direction: row;
+  background-color: #777fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px black, 15px -15px 5px #a83d3d, 30px -30px 10px #66a83d, 45px -45px 15px #3d3da8;
+}
+
+
+#loginPage h1{
+  letter-spacing: 30px;
+  text-align: center;
+  height: fit-content;
+  font-size: 40px;
+  color: white;
+  text-shadow: 0px 0px 6px black, 15px -15px 5px #a83d3d, 30px -30px 10px #66a83d, 45px -45px 15px #3d3da8;
+}
+
+
+#loginPage h2{
+  font-size: 14px;
+}
+
+
+#loginPage form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 70%;
+  width: 40%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #777fff;
+  box-shadow: 0px 0px 15px black, 15px -15px 5px #a83d3d, 30px -30px 10px #66a83d, 45px -45px 15px #3d3da8;
+}
+
+
+#loginPage label.credential{
+  display: flex;
+  flex-direction: column;
+}
+
+
+#loginPage input.credential{
+  width: 90%;
+  align-self: center
+}
+
+
+#loginPage input[name="submit"]{
+  align-self: center;
+  width: 30%;
+  padding: 10px 20px;
+  background-color: white;
+  border: 4px solid #cccfff;
+  border-radius: 100px;
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Emcomp</title>
+    <link rel="stylesheet" href="css/mainPage.css">
+    <link rel="stylesheet" href="css/loginPage.css">
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/registersPage.css">
+    <link rel="stylesheet" href="css/registerForm.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/login.js"></script>
+    <script src="js/Register.js"></script>
+    <script src="js/Database.js"></script>
+    <script src="js/index.js"></script>
+</head>
+
+<body>
+    <nav>
+        <button onClick="changePage('main')" id="mainPageBtn">Inicio</button>
+        <button onClick="changePage('login')" id="loginPageBtn" class="selected">login</button>
+        <button onClick="changePage('registers')" id="registersPageBtn">Gerenciar cadastros</button>
+    </nav>
+
+    <div id="mainPage" class="hidden">
+        <img src="assets/sitePlaceholder.png" id="placeholder">
+    </div>
+
+    <div id="loginPage" class="visible">
+        <main>
+            <div id="left">
+                <h1>LOGIN</h1>
+            </div>
+            <form>
+                <label class="credential">
+                    <h2>CPF</h2>
+                    <input type="text" placeholder="exemplo@exemplo.com" name="userEmail" class="credential">
+                </label>
+    
+                <label class="credential">
+                    <h2>Senha</h2>
+                    <input type="password" placeholder="********" name="userPassword" class="credential">
+                </label>
+    
+                <label>
+                    <input type="checkbox">
+                    Manter-me conectado
+                </label>
+    
+                <input type="button" name="submit" value="Entrar">
+            </form>
+        </main>
+    </div>
+
+
+    <div id="registersPage" class="hidden">
+        <main>
+            <h1>Gerenciador de cadastros</h1>
+            <div id="container">
+                <div id="registerFormContainer">
+                    <h2 class="title">Cadastrar usuário</h2>
+                    <form id="registerForm">
+                        <label>
+                            <h2>Nome completo</h2>
+                            <input class="credential" type="text" name="name" placeholder="Nome completo">
+                        </label>
+
+                        <label>
+                            <h2>Endereço</h2>
+                            <input class="credential" type="text" name="address" placeholder="Endereço">
+                        </label>
+                        
+                        <label>
+                            <h2>Telefone</h2>
+                            <input class="credential" type="text" name="phone" placeholder="Telefone">
+                        </label>
+                        
+                        <label>
+                            <h2>E-Mail</h2>
+                            <input class="credential" type="text" name="email" placeholder="E-Mail">
+                        </label>
+
+                        <label>
+                            <h2>CPF</h2>
+                            <input class="credential" type="text" name="idNumber" placeholder="Identidade">
+                        </label>
+
+                        <label>
+                            <h2>Senha</h2>
+                            <input class="credential" type="password" name="password" placeholder="********">
+                        </label>
+
+                        <label>
+                            <h2>Repetir senha</h2>
+                            <input class="credential" type="password" name="repeatPassword" placeholder="********">
+                        </label>
+
+                        <div id="accountType">
+                            <span>Tipo da conta: </span>
+                            <label>
+                                <input type="radio" name="accountType" value="admin">
+                                <span>Administrador</span>
+                            </label>
+
+                            <label>
+                                <input type="radio" name="accountType" value="user" checked>
+                                <span>Usuário</span>
+                            </label>
+                        </div>
+                        <input type="button" name="register" value="Cadastrar usuário">
+                    </form>
+                </div>
+    
+                <div id="registeredUsers">
+                    <h2 class="title">Clique em <img src="assets/icons/editar.png" id="editIcon"> para editar</h2>
+                    <div id="registersContainer">
+                        <!-- REGISTERS GOES HERE -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+
+
+<!-- REGISTER TEMPLATE -->
+<template id="register_template">
+    <header class="registerHeader">
+        <h1 id="name">Nome do usuário</h1>
+        <button id="minimize"></button>
+    </header>
+    
+    <div class="dateContainer hideWhenMinimized">
+        <span id="creationDate">Criado em DD/MM/AAAA</span>
+        <span id="changeDate">Última modificação: DD/MM/AAAA</span>
+    </div>
+    <form>
+        <div class="inputContainer hideWhenMinimized">
+            <h2>Nome completo</h2>
+            <input class="credential hideWhenMinimized" type="text" name="name" placeholder="Nome do usuário">
+        </div>
+
+        <div class="inputContainer">
+            <h2>Endereço</h2>
+            <input class="credential" type="text" name="address" placeholder="Endereço do usuário">
+        </div>
+
+        <div class="inputContainer">
+            <h2>Telefone</h2>
+            <input class="credential" type="text" name="phone" placeholder="(XX) XXXX-XXXX">
+        </div>
+
+        <div class="inputContainer">
+            <h2>E-Mail</h2>
+            <input class="credential" type="text" name="email" placeholder="exemplo@exemplo.com">
+        </div>
+
+        <div class="inputContainer">
+            <h2>CPF</h2>
+            <input class="credential" type="text" name="idNumber" placeholder="1234567890">
+        </div>
+
+        <div class="inputContainer hideWhenMinimized">
+            <h2>Senha</h2>
+            <input class="credential hideWhenMinimized" type="text" name="password" placeholder="1234567890">
+        </div>
+
+        <div class="accoutType hideWhenMinimized">
+            <span>Tipo da conta: </span>
+            <label>
+                <input type="radio" name="accountType" value="admin">
+                <span>Administrador</span>
+            </label>
+            
+            <label>
+                <input type="radio" name="accountType" value="user">
+                <span>Usuário</span>
+            </label>
+        </div>
+
+        <div class="action">
+            <input type="button" name="excludeBtn" class="deleteBtn actionButton" value="Excluir">
+            <input type="button" name="discartBtn" class="discartBtn actionButton" value="Descartar alterações">
+            <input type="button" name="saveBtn" class="saveBtn actionButton" value="Salvar alterações">
+        </div>
+    </form>
+</template>
+</html>

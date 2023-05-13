@@ -1,0 +1,194 @@
+div.register{
+    background-color: #0f1326;
+    max-height: fit-content;
+    border: 2px solid #8a71ff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+    transition-duration: 0.6s;
+    transition-timing-function: cubic-bezier(.23,1.66,.29,.95);
+}
+
+
+.register .dateContainer{ 
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.register input.credential{
+    box-sizing: border-box;
+    padding: 0px 10px;
+    background-color: #362551;
+    border: 1px solid black;
+    border-radius: 4px;
+    height: 20px;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+}
+
+
+.register .inputContainer *{  
+    width: 100%;
+    height: fit-content;
+}
+
+.register div.accoutType{
+    width: 100%;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+.register .action{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    filter: grayscale(0%);
+}
+
+
+.register.minimized .action{
+    filter: grayscale(100%);
+    opacity: 0%;
+    transform: scaleY(0);
+    height: 0px;
+}
+
+
+.register .actionButton{ 
+    width: 32%;
+    height: inherit;
+    border: none;
+    color: black;
+    padding: 5px;
+    border-radius: 10px;
+    scale: 100%;
+}
+
+
+.register.minimized .actionButton{ 
+    scale: 0%;
+}
+
+
+.register .deleteBtn{ background-color: #E47878}
+
+
+.register .discartBtn{ background-color: #D5E478}
+
+
+.register .saveBtn{ background-color: #78E496}
+
+
+.register h1{
+    font-size: 32px;
+}
+
+
+.register h2{
+    font-size:16px;
+}
+
+.register.minimized h2{  
+    height: 0px;
+    opacity: 0%;
+}
+
+
+.register.minimized *{ 
+    /*pointer-events: none;*/
+    user-select: none;
+}
+
+
+.register h1{
+    transition-duration: .4s;
+    transition-timing-function: cubic-bezier(.39,2.14,.2,.9);
+}
+
+
+.register *{
+    transition-duration: .6s;
+    transition-timing-function: cubic-bezier(.12,.97,.06,1);
+}
+
+
+.register.minimized h1{
+    font-size: 20px;
+}
+
+
+.register.minimized #creationDate, .register.minimized #changeDate{
+    height: inherit;
+    overflow: minimized;
+    opacity: 0%;
+}
+
+
+.register.minimized input.credential{
+    background-color: transparent;
+    color: white;
+    border-color: transparent;
+    cursor: default;
+}
+
+.register.minimized .hideWhenMinimized{   
+    opacity: 0%;
+    height: 0px;
+}
+
+
+.registerHeader{
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.registerHeader h1{
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: minimized;
+    width: 80%;
+}
+
+
+.registerHeader button#minimize{
+    color: black;
+    height: 100%;
+    background-color: red;
+    background: url("../assets/icons/editar.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    box-shadow: 0px 0px 5px yellow;
+    filter: grayscale(0%);
+    border: none;
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 8px;
+    outline-offset: 3px;
+    outline: 2px solid transparent;
+}
+
+.register.minimized .registerHeader button#minimize{
+    filter: grayscale(100%);
+    width: 30px;
+    height: 30px;
+    box-shadow: none;
+}
