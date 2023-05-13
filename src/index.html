@@ -8,45 +8,45 @@
     <link rel="stylesheet" href="css/register.css">
     <link rel="stylesheet" href="css/registersPage.css">
     <link rel="stylesheet" href="css/registerForm.css">
-    <link rel="stylesheet" href="css/popup.css">
     <link rel="stylesheet" href="css/index.css">
     <script src="js/login.js"></script>
     <script src="js/Register.js"></script>
     <script src="js/Database.js"></script>
-    <script src="js/popup.js"></script>
     <script src="js/index.js"></script>
 </head>
 
 <body>
     <nav>
-        <button onClick="changePage('main')" class="selected" id="mainPageBtn">Inicio</button>
-        <button onClick="changePage('login')" id="loginPageBtn">login</button>
+        <button onClick="changePage('main')" id="mainPageBtn">Inicio</button>
+        <button onClick="changePage('login')" id="loginPageBtn" class="selected">login</button>
         <button onClick="changePage('registers')" id="registersPageBtn">Gerenciar cadastros</button>
     </nav>
 
     <div id="mainPage" class="hidden">
-        yup, content hoes here
+        <img src="assets/sitePlaceholder.png" id="placeholder">
     </div>
 
     <div id="loginPage" class="visible">
         <main>
-            <h1> LOGIN</h1>
+            <div id="left">
+                <h1>LOGIN</h1>
+            </div>
             <form>
                 <label class="credential">
                     <h2>CPF</h2>
-                    <input type="text" placeholder="exemplo@exemplo.com" id="e" name="userEmail" class="credential">
+                    <input type="text" placeholder="exemplo@exemplo.com" name="userEmail" class="credential">
                 </label>
-
+    
                 <label class="credential">
                     <h2>Senha</h2>
                     <input type="password" placeholder="********" name="userPassword" class="credential">
                 </label>
-
+    
                 <label>
                     <input type="checkbox">
                     Manter-me conectado
                 </label>
-
+    
                 <input type="button" name="submit" value="Entrar">
             </form>
         </main>
@@ -121,6 +121,8 @@
         </main>
     </div>
 </body>
+
+
 
 <!-- REGISTER TEMPLATE -->
 <template id="register_template">

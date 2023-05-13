@@ -22,20 +22,23 @@ nav{
     position: absolute;
     width: 100vw;
     z-index: 10;
+    box-shadow: 3px 0px 7px 1px #757fff;
 }
 
 
 nav button{
-    background: #ffffff2f;
+    background: #353439;
     margin: 0px 10px;
     padding: 5px;
-    border-radius: 5px;
-    border: 2px solid white;
+    border-radius: 8px;
+    border: none;
+    transition-duration: .5s;
 }
 
 
 nav button.selected{
-    border: 2px solid red;
+    background-color: #ea71ff;
+    color: black;
 }
 
 

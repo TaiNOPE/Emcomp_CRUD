@@ -5,7 +5,6 @@ class Register{
         this._element.innerHTML = template.innerHTML;
         this._element.className = "register minimized";
         this._isMinimized = true;
-
         this._userName          = "";
         this._userAddress       = "";
         this._userPhone         = "";
@@ -115,6 +114,7 @@ class Register{
         this._headerName.innerHTML = name;
     }
 
+    
     get userAddress(){return (this._userAddress); }
 
     set userAddress(address){ this._userAddress = address; }
@@ -231,5 +231,50 @@ class Register{
         };
 
         return(JSON.stringify(json));
+    }
+
+
+    static validateCredentials(json){
+        if(json["userName"] == ""){
+            alert("Nome é obrigatório");
+            return(false);
+        }
+
+        if(json["userAddress"] == ""){
+            alert("Endereço é obrigatório");
+            return(false);
+        }
+
+        if(json["userPhone"] == ""){
+            alert("Telefone é obrigatório");
+            return(false);
+        }
+
+        if(json["userEmail"] == ""){
+            alert("E-Mail é obrigatório");
+            return(false);
+        }
+
+        if(json["userId"] == ""){
+            alert("CPF é obrigatório");
+            return(false);
+        }
+
+        if((json["userPassword"] == "") || (json["repeatPassword"]) == ""){
+            alert("Senhas são obrigatórias");
+            return(false);
+        }
+
+        if(json["userPassword"] != json["repeatPassword"]){
+            alert("Senhas não correspondem");
+            return(false);
+        }
+
+        if(json["userId"] == "admin"){
+            alert("Não pode ser cadastrado 'admin'");
+            return(false);
+        }
+
+        return(true);
     }
 }

@@ -40,6 +40,7 @@ class Database{
         return(regJSON);
     }
 
+
     static delete(register){
         localStorage.removeItem(register.userId);
     }
